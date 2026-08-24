@@ -1,0 +1,24 @@
+name: Provider compatibility
+description: Report a payload rejected by OpenAI, Anthropic, Gemini, MCP, or Vercel
+title: "[provider] "
+labels: [provider]
+body:
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider
+      options: [OpenAI, Anthropic, Gemini, MCP, Vercel AI SDK]
+    validations:
+      required: true
+  - type: input
+    id: sdk
+    attributes:
+      label: SDK and model version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and provider error
+    validations:
+      required: true

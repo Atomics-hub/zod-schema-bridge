@@ -1,0 +1,128 @@
+{
+  "name": "zod-schema-bridge",
+  "version": "0.2.0",
+  "description": "The migration bridge from zod-to-json-schema to Zod 4, with provider-ready OpenAI, Anthropic, Gemini, MCP, and Vercel payloads.",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atomics-hub/zod-schema-bridge.git"
+  },
+  "homepage": "https://github.com/Atomics-hub/zod-schema-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/Atomics-hub/zod-schema-bridge/issues"
+  },
+  "packageManager": "npm@11.6.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./migrate": {
+      "types": "./dist/migrate-entry.d.ts",
+      "import": "./dist/migrate-entry.js",
+      "require": "./dist/migrate-entry.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "zod-schema-bridge": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/migrate-entry.ts src/cli.ts --format esm,cjs --dts --clean --sourcemap --splitting false",
+    "check": "tsc --noEmit",
+    "test": "tsx test/index.ts",
+    "test:coverage": "c8 tsx test/index.ts",
+    "test:stress": "BRIDGE_STRESS_RUNS=2000 tsx test/stress.test.ts",
+    "test:cli": "node test/cli-smoke.mjs",
+    "test:browser": "node test/browser-boundary.mjs",
+    "test:bundle": "node test/bundle-budget.mjs",
+    "test:package-managers": "node test/package-manager-matrix.mjs",
+    "test:consumers": "node test/consumer-matrix.mjs",
+    "verify": "npm run check && npm run test:coverage && npm run build && npm run test:browser && npm run test:bundle && npm run test:cli && npm pack --dry-run",
+    "prepublishOnly": "npm run verify"
+  },
+  "keywords": [
+    "zod",
+    "json-schema",
+    "openapi",
+    "openai",
+    "mcp",
+    "anthropic",
+    "gemini",
+    "vercel-ai-sdk",
+    "codemod",
+    "migration",
+    "schema",
+    "compatibility"
+  ],
+  "license": "ISC",
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/cli.ts",
+      "src/migrate.ts",
+      "src/migrate-entry.ts"
+    ],
+    "check-coverage": true,
+    "lines": 88,
+    "statements": 88,
+    "functions": 95,
+    "branches": 75,
+    "reporter": [
+      "text"
+    ]
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "overrides": {
+    "tsup": {
+      "esbuild": "^0.28.1"
+    }
+  },
+  "peerDependencies": {
+    "zod": "^3.25.28 || ^4"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.120.0",
+    "@google/genai": "^2.18.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^22.0.0",
+    "ai": "^7.0.77",
+    "ajv": "^8.17.1",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^3.0.1",
+    "c8": "^12.0.0",
+    "esbuild": "^0.28.2",
+    "fast-check": "^4.3.0",
+    "fast-diff": "^1.3.0",
+    "local-ref-resolver": "^0.2.0",
+    "openai": "^7.5.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0",
+    "zod": "^4.4.3"
+  }
+}

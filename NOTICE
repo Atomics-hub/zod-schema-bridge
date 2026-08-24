@@ -1,0 +1,8 @@
+This project includes and adapts code from zod-to-json-schema:
+https://github.com/StefanTerdell/zod-to-json-schema
+
+Original work copyright (c) 2020 Stefan Terdell and contributors.
+Used under the ISC License. The original license text is preserved in LICENSE.
+
+zod-schema-bridge is an independent compatibility project and is not currently
+affiliated with or endorsed by the original project or the Zod project.
